@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "ViewUserSheet";
+
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">UserName</th>
+            <th scope="col">NationalID</th>
+            <th scope="col">Password</th>
+            <th scope="col">Email</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">El-Geha</th>
+            <th scope="col">Sector</th>
+            <th scope="col">JobTitle</th>
+        </tr>
+    </thead>
+    <tbody id="x">
+        @foreach (var Users in (IEnumerable<QuizbeeUser>)ViewData["Obj"])
+        {
+            <tr>
+                <td>@Users.Id</td>
+                <td>@Users.UserName</td>
+                <td>@Users.NationalID</td>
+                <td>@Users.PasswordHash</td>
+                <td>@Users.Email</td>
+                <td>@Users.PhoneNumber</td>
+                <td>@Users.Elgeha</td>
+                <td>@Users.Sector</td>
+                <td>@Users.JobTitle</td>
+            </tr>
+
+        }
+    </tbody>
+
+</table>

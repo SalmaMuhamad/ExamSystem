@@ -1,0 +1,214 @@
+﻿@model QuizbeePlus.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "StudentRegister";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<section>
+
+    <div id="home">
+        <div class="black-layer">
+            <div class="container">
+                <div class="home-data">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="wrapper-page">
+                                    <div class="m-t-40 card-box">
+                                        <div class="text-center">
+                                            <h4 class="text-uppercase font-bold m-b-0">Register</h4>
+                                        </div>
+                                        <div class="account-content">
+                                            <form class="form-horizontal" method="post">
+                                                @Html.AntiForgeryToken()
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="Username">National ID</label>
+                                                        <input type="text" name="NationalID" class="form-control" placeholder="National ID" value="@Model.NationalID " required>
+                                                        @Html.ValidationMessageFor(m => m.NationalID, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="Username">Full Name</label>
+                                                        <input type="text" name="Name" class="form-control" placeholder="Full Name" value="@Model.Name" required>
+                                                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="Email">Email</label>
+                                                        <input type="email" name="Email" class="form-control" placeholder="Enter your Email" value="@Model.Email" required>
+                                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="password">Password</label>
+                                                        <input type="password" name="Password" class="form-control" placeholder="Enter Password" value="@Model.Password">
+                                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="ConfirmPassword">Confirm Password</label>
+                                                        <input type="password" name="ConfirmPassword" class="form-control" placeholder="Enter Confirm Password" value="@Model.ConfirmPassword">
+                                                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="ConfirmPassword">University </label>
+                                                        <input type="text" name="University" class="form-control" placeholder="for example : Cairo , Helwan ..." value="@Model.University">
+                                                        @Html.ValidationMessageFor(m => m.University, "", new { @class = "text-danger" })
+                                                        @*@Html.DropDownListFor(t => t.MinistryID, new SelectList(Model.Ministries, "ID", "Name"), "", new { @class = "form-control" })*@
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="ConfirmPassword">Faculty </label>
+                                                        <input type="text" name="Faculty" class="form-control" placeholder="for example : Engineering , Computers & Info ..." value="@Model.Faculty">
+                                                        @Html.ValidationMessageFor(m => m.Faculty, "", new { @class = "text-danger" })
+                                                        @*@Html.DropDownListFor(t => t.CategoryID, new SelectList(Model.Categories, "ID", "Name"), "", new { @class = "form-control" })*@
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="ConfirmPassword">Grade </label>
+                                                        <input type="text" name="Grade" class="form-control" placeholder="for example : Fair , Good , VeryGood , Excellent" value="@Model.Grade">
+                                                        @Html.ValidationMessageFor(m => m.Grade, "", new { @class = "text-danger" })
+                                                        @*@Html.DropDownListFor(t => t.MinistryID, new SelectList(Model.Ministries, "ID", "Name"), "", new { @class = "form-control" })*@
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="Address">Address</label>
+                                                        <input type="text" name="Address" class="form-control" placeholder="EX : 20 ahmedTyseer ST,MadinetNasr , Cairo " value="@Model.Address" required>
+                                                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="GradYear">Graduation Year</label>
+                                                        <input type="text" name="GradYear" class="form-control" placeholder="Graduation Year" value="@Model.GradYear" required>
+                                                        @Html.ValidationMessageFor(m => m.GradYear, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="Mobile">Mobile Number</label>
+                                                        <input type="text" name="MobileNumber" class="form-control" placeholder="Mobile Number" value="@Model.MobileNumber" required>
+                                                        @Html.ValidationMessageFor(m => m.MobileNumber, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group m-b-20">
+                                                    <div class="col-xs-12">
+                                                        <label for="Mobile">Birth Date</label>
+                                                        <input type="date" name="BirthDate" class="form-control"  required>
+                                                        @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                @*<div class="form-group m-b-20">
+            <div class="col-xs-12">
+                <label for="">from </label>
+
+                @Html.EditorFor(model => model.StartedAt, new { htmlAttributes = new { @class = "form-control  col-md-1", required = "required" } })
+                @Html.ValidationMessageFor(model => model.StartedAt, "", new { @class = "text-danger" })
+
+
+            </div>
+        </div>
+        <div class="form-group m-b-20">
+            <div class="col-xs-12">
+                <label for="">to </label>
+                @Html.EditorFor(model => model.CompletedAt, new { htmlAttributes = new { @class = "form-control  col-md-1", required = "required" } })
+                @Html.ValidationMessageFor(model => model.CompletedAt, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="form-group m-b-20">
+            <div class="col-xs-12">
+                <label for="ConfirmPassword">قاعه </label>
+                @Html.DropDownListFor(t => t.HallID, new SelectList(Model.Halls, "ID", "HallNumber"), "", new { @class = "form-control" })
+
+            </div>
+        </div>
+        <div class="form-group m-b-20">
+            <div class="col-xs-12">
+                <label for="Elgeha">Elgeha</label>
+                <input type="text" name="Elgeha" class="form-control" placeholder="Enter your Elgeha" value="@Model.Username">
+                @Html.ValidationMessageFor(m => m.Elgeha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group m-b-20">
+            <div class="col-xs-12">
+                <label for="JobTitle">JobTitle</label>
+                <input type="text" name="JobTitle" class="form-control" placeholder="Enter your JobTitle" value="@Model.Username">
+                @Html.ValidationMessageFor(m => m.JobTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                                                @*<div class="form-group m-b-20">
+            <div class="col-xs-12">
+                <label for="MobileNumber">Mobile Number</label>
+                <input type="number" name="Email" class="form-control" placeholder="Enter your Phone Number" value="@Model.MobileNumber">
+            </div>
+        </div>*@
+
+
+                                                <div class="form-group m-b-30">
+                                                    <div class="col-xs-12">
+                                                        <div class="checkbox checkbox-primary">
+                                                            <input id="TermsConditions" type="checkbox">
+                                                            <label for="TermsConditions">
+                                                                I accept <a href="#">Terms and Conditions</a>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group account-btn text-center m-t-10">
+                                                    <div class="col-xs-12">
+                                                        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <p class="text-center">
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                </p>
+                                            </form>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                                    </div>
+                                    <div class="row m-t-50">
+                                        <div class="col-sm-12 text-center">
+                                            <p class="text-muted">Already have an account? <a href="@Url.Login()" class="text-dark m-l-5">Login</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

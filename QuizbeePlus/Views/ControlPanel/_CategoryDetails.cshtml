@@ -1,0 +1,130 @@
+﻿
+@model QuizbeePlus.ViewModels.CategoryDetailsViewModel
+
+<div class="row">
+    @Html.Partial("_Loader", "categoryLoader")
+    <div class="col-md-12">
+        <div class="panel panel-default panel-fill">
+            <div class="panel-heading">
+                <h3 class="panel-title">Category Info</h3>
+            </div>
+            <div class="panel-body">
+                <form id="CategoryForm">
+                    <div class="form-group">
+                        <label for="Name">Category Name</label>
+                        <input type="text" value="@Model.Category.Category.Name" id="Name" name="Name" class="form-control" required="">
+                    </div>
+                    <button class="btn btn-success waves-effect waves-light w-md" id="updateCategoryButton" type="button">Update Category Info</button>
+                    <button class="btn btn-danger waves-effect waves-light w-md" id="deleteCategoryButton" type="button">Delete Category</button>
+                    <button class="btn btn-primary waves-effect waves-light w-md" id="goBackButton" type="button">Go Back</button>
+
+                    <div id="CategoryFormErrorsDiv" style="display:none" class="mt-2 alert alert-icon alert-danger m" role="alert">
+                        <i class="mdi mdi-alert-circle"></i>
+                        <div id="CategoryFormErrors"></div>
+                    </div>
+                </form>
+
+                <script>
+                	$(document).ready(function () {
+                        $("#updateCategoryButton").click(function () {
+                            $("#CategoryFormErrorsDiv").hide();
+
+                            $("#categoryLoader").show();
+                			$.ajax({
+                				type: "POST",
+                				async: true,
+                				url: '@Url.UpdateCategory(Model.Category.Category.ID)',
+                                data: {
+                                    Name: $("#Name").val(),
+                                }
+                            })
+                			.done(function (data) {
+                                $("#categoryLoader").hide();
+                				if (data.Success)
+                				{
+                                    swal({
+                                        title: 'Category Details Updated',
+                                        type: 'success',
+                                        confirmButtonColor: '#4fa7f3'
+                                    });
+                				}
+                				else
+                                {
+                					$("#CategoryFormErrors").html(data.Errors);
+                					$("#CategoryFormErrorsDiv").slideDown();
+                					console.log(data.Errors);
+                				}
+                            })
+                			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                                $("#categoryLoader").hide();
+                				$("#CategoryFormErrors").html(errorThrown);
+                				$("#CategoryFormErrorsDiv").slideDown();
+                				console.log(errorThrown);
+                            });
+                        });
+
+                        $("#deleteCategoryButton").click(function () {
+                			$("#CategoryFormErrorsDiv").hide();
+
+                            $("#categoryLoader").show();
+                			$.ajax({
+                				type: "POST",
+                				async: true,
+                				url: '@Url.DeleteCategory(Model.Category.Category.ID)'
+                            })
+                			.done(function (data) {
+                                $("#categoryLoader").hide();
+                				if (data.Success)
+                				{
+                                    swal({
+                                        title: 'Category Deleted',
+                                        type: 'success',
+                                        confirmButtonColor: '#4fa7f3'
+                                    }).then(function () {
+                                        $("#goBackButton").click();
+                                    });
+                				}
+                				else
+                                {
+                					$("#CategoryFormErrors").html(data.Errors);
+                					$("#CategoryFormErrorsDiv").slideDown();
+                					console.log(data.Errors);
+                				}
+                            })
+                			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                                $("#categoryLoader").hide();
+                				$("#CategoryFormErrors").html(errorThrown);
+                				$("#CategoryFormErrorsDiv").slideDown();
+                				console.log(errorThrown);
+                            });
+                        });
+
+                        $("#goBackButton").click(function () {
+                            $("#categoryLoader").show();
+
+                            $.ajax({
+                                type: "GET",
+                                async: true,
+                                url: '@Url.CPCategories()',
+                            })
+                            .done(function (data) {
+                                $('#categoriesTab').toggle('slide', {
+                                    categoriesdirection: 'left'
+                                }, 250, function () {
+                                    $("#categoriesTab").html(data);
+                                    $('#categoriesTab').toggle('slide', {
+                                        direction: 'right'
+                                    }, 250);
+                                });
+                            })
+                            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                                $("#categoryLoader").hide();
+                                alert(errorThrown);
+                            });
+                        });
+                	});
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿
+
+@model NewQuestionViewModel
+@*@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+@*<div class="row">
+    @Html.Partial("_Loader", "newQuestionLoader")
+  
+
+    <div class="card-body">
+     
+        <div>
+            @Html.Partial("_NewTextQuestion", Model)
+        </div>
+        
+    </div>
+</div>*@
+
+    <div class="card-body">
+        <div class="col-md-12">
+            <h4>Add Users via Excel</h4>
+            <hr />
+            @using (Html.BeginForm("UploadExcel", "ControlPanel", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="control-label col-md-2">Download Format:</div>
+                        <div class="col-md-10">
+                            <a href="~/User/DownloadExcel/">
+                                <img src="/Content/images/users/excel.png" width="25" height="25" title="Download Excel format" alt="User.xlsx" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="control-label col-md-2">Excel:</div>
+                        <div class="col-md-10">
+                            <input type="file" id="FileUpload" name="FileUpload" class="" />
+                        </div>
+                    </div>
+                </div>
+             }
+
+        </div>
+    </div>
+    

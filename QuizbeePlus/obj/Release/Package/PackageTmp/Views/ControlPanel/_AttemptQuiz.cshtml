@@ -1,0 +1,11 @@
+﻿
+
+@model QuizbeePlus.ViewModels.AttemptQuizViewModel
+
+<div class="form-group m-b-20">
+    <div class="col-xs-12">
+        <label for="">Category </label>
+        @Html.DropDownListFor(t => t.CategoryID, new SelectList(Model.Categories, "ID", "Name"), "", new { @class = "form-control" })
+
+    </div>
+</div>

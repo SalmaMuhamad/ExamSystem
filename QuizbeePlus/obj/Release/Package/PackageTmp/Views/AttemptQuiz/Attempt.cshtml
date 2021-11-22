@@ -1,0 +1,98 @@
+﻿@model QuizbeePlus.ViewModels.CategoryDetailViewModel
+@{
+    ViewBag.Title = Model.PageInfo.PageTitle;
+}
+
+<script src="~/Content/plugins/moment/moment.js"></script>
+<link href="~/Content/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header text-center">
+                    <div class="pull-left">
+                        <h3 class="panel-title">
+                            <span><i class="fas fa-question-circle mg-r-10"></i>&nbsp;</span>
+                            @Model.PageInfo.PageTitle
+                        </h3>
+                    </div>
+                    <div class="pull-right">
+                     
+                            <h2 class="panel-title pull-right text-danger">
+                                <span><i class="fas fa-stopwatch mg-r-10"></i>&nbsp;</span>
+                                <span id="hours">No Time</span>
+                                
+                        
+                    </div>
+                </div>
+                <div id="contenter" class="card-body">
+                    <div class="wrapper-page m-b-5 mt-5">
+                        <div class="m-t-40 card-box">
+                            <div class="text-center">
+                                <h4 class="text-uppercase font-bold m-b-0">@Model.Name</h4>
+                            </div>
+                            <hr />
+                            <div class="m-b-20 text-justify">
+                                <p class="text-muted m-t-30 line-h-24">
+                                    @Model.Description
+                                </p>
+                            </div>
+
+                            <div class="row m-t-30">
+                                <div class="col-12">
+                                    <button type="button" id="startButton" class="btn btn-lg btn-success btn-block waves-effect waves-light w-md"><i class="fas fa-sign-in-alt"></i>&nbsp;إبدء الإختبار</button>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center text-muted">
+                   
+            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="TimerExpired" value="false" />
+
+<script src="~/Content/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#startButton").click(function() {
+            StartQuiz();
+        });
+    });
+
+    function StartQuiz() {
+        $("#questionLoader").show();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.AttemptQuiz(Model.ID)',
+            data: {
+                CategoryID: '@Model.ID'
+            }
+        }).done(function(data) {
+            
+
+            $('#contenter').toggle('slide', {
+                direction: 'left'
+            }, 250, function() {
+                $("#contenter").html(data);
+                $('#contenter').toggle('slide', {
+                    direction: 'right'
+                }, 250);
+            });
+        }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+            $("#questionLoader").hide();
+            alert(errorThrown);
+        });
+    }
+
+
+</script>

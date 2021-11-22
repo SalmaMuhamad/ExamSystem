@@ -1,0 +1,24 @@
+﻿@model QuizbeePlus.ViewModels.EditQuestionViewModel
+@{
+    ViewBag.Title = Model.PageInfo.PageTitle;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                
+                <div class="card-body">
+                 
+                        <div>
+                            @Html.Partial("_EditTextQuestion", Model)
+                        </div>
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

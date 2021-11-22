@@ -1,0 +1,53 @@
+﻿
+
+@model QuizbeePlus.ViewModels.AttemptQuizViewModel
+<form role="form" id="operationForm" method="post" action="@Url.StartExam()">
+    <div class="form-group m-b-20">
+        <div class="col-xs-12">
+            <label for="">Category </label>
+            @*@Html.DropDownListFor(t => t.CategoryID, new SelectList(Model.Categories, "ID", "Name"), "", new { @class = "form-control" })*@
+
+        </div>
+    </div>
+    <div class="row m-t-30">
+        <div class="col-12">
+            <button type="submit" id="" class="btn btn-lg btn-success btn-block waves-effect waves-light w-md"><i class="fas fa-sign-in-alt"></i>&nbsp;Start Quiz</button>
+        </div>
+    </div>
+
+</form>
+
+
+@{
+    ViewBag.Title = "AttemptQuiz";
+}
+<script src="~/Content/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#startButton").click(function() {
+            StartQuiz();
+        });
+    });
+
+    function StartQuiz() {
+
+        $.ajax({
+            type: "POST",
+           
+            url: '@Url.StartExam()',
+            data: {
+                CategoryID: $("#CategoryID").val(),
+             
+            }
+
+        }).done(function(data) {
+
+
+
+        }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+
+        });
+    }
+
+
+</script>

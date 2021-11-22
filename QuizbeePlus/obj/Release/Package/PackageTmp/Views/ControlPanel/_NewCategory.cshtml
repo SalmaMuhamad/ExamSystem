@@ -1,0 +1,94 @@
+﻿
+
+@model NewCategoryViewModel
+
+<div class="row">
+    @Html.Partial("_Loader", "newCategoryLoader")
+    <div class="col-md-12">
+        <div class="panel panel-default panel-fill">
+            <div class="panel-heading">
+                <h3 class="panel-title">New Category</h3>
+            </div>
+            <div class="panel-body">
+                <form id="CategoryForm">
+                    <div class="form-group">
+                        <label for="Name">Category Name</label>
+                        <input type="text" value="@Model.Name" id="Name" name="Name" class="form-control" required="">
+                    </div>
+                    <button class="btn btn-success waves-effect waves-light w-md" id="newCategoryButton" type="button">Add New Category</button>
+                    <button class="btn btn-primary waves-effect waves-light w-md" id="goBackButton" type="button">Go Back</button>
+
+                    <div id="CategoryFormErrorsDiv" style="display:none" class="mt-2 alert alert-icon alert-danger m" role="alert">
+                        <i class="mdi mdi-alert-circle"></i>
+                        <div id="CategoryFormErrors"></div>
+                    </div>
+                </form>
+
+                <script>
+                	$(document).ready(function () {
+                        $("#newCategoryButton").click(function () {
+                            $("#CategoryFormErrorsDiv").hide();
+
+                            $("#newCategoryLoader").show();
+                			$.ajax({
+                				type: "POST",
+                				async: true,
+                				url: '@Url.CPNewCategory()',
+                                data: {
+                                    Name: $("#Name").val(),
+                                }
+                            })
+                			.done(function (data) {
+                                $("#newCategoryLoader").hide();
+                				if (data.Success)
+                				{
+                                    swal({
+                                        title: 'New Category Added',
+                                        type: 'success',
+                                        confirmButtonColor: '#4fa7f3'
+                                    });
+                				}
+                				else
+                                {
+                					$("#CategoryFormErrors").html(data.Errors);
+                                    $("#CategoryFormErrorsDiv").slideDown();
+                					console.log(data.Errors);
+                				}
+                            })
+                			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                                $("#newCategoryLoader").hide();
+                				$("#CategoryFormErrors").html(errorThrown);
+                                $("#CategoryFormErrorsDiv").slideDown();
+                				console.log(errorThrown);
+                            });
+                        });
+
+                        $("#goBackButton").click(function () {
+                            $("#newCategoryLoader").show();
+
+                            $.ajax({
+                                type: "GET",
+                                async: true,
+                                url: '@Url.CPCategories()',
+                            })
+                            .done(function (data) {
+                                $('#categoriesTab').toggle('slide', {
+                                    direction: 'left'
+                                }, 250, function () {
+                                    $("#categoriesTab").html(data);
+                                    $('#categoriesTab').toggle('slide', {
+                                    direction: 'right'
+                                    }, 250);
+                                });
+                            })
+                            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                                $("#newCategoryLoader").hide();
+                                alert(errorThrown);
+                            });
+                        });
+                	});
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

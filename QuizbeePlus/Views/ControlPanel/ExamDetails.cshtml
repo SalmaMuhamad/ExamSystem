@@ -1,0 +1,59 @@
+﻿@model QuizbeePlus.ViewModels.ExamDetailViewModel
+
+
+<div class="row">
+    @Html.Partial("_Loader", "attemptsLoader")
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-striped table-bordered m-b-0">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Selected Option</th>
+                                <th>Right Option</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ExamQuestions)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Question.Title
+                                    </td>
+                                    <td>
+                                        @item.Option.Answer
+                                    </td>
+                                    <td>
+                                        @if (item.Option.IsCorrect)
+                                        {
+                                            @item.Option.IsCorrect
+                                        }
+                                        else
+                                        {
+                                            QuizbeeContext db = new QuizbeeContext();
+                                            var aya= db.Questions.Where(c => c.ID == item.QuestionID).FirstOrDefault().Options.Where(x => x.IsCorrect == true);
+                                            foreach (var item2 in aya)
+                                            {
+                                                @item2.Answer
+                                            }
+
+                                        }
+                                    </td>
+                                </tr>
+}
+
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

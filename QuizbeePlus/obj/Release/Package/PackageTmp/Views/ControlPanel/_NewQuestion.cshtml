@@ -1,0 +1,18 @@
+﻿
+
+@model NewQuestionViewModel
+@*@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+<div class="row">
+    @Html.Partial("_Loader", "newQuestionLoader")
+  
+
+    <div class="card-body">
+     
+        <div>
+            @Html.Partial("_NewTextQuestion", Model)
+        </div>
+        
+    </div>
+</div>
